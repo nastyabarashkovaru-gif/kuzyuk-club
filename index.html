@@ -439,16 +439,35 @@ body {
 .compare__row--head .compare__cell:nth-child(4) { background: var(--accent); color: white; }
 .compare__cell:nth-child(4) { background: var(--accent-glow); font-weight: 600; color: var(--text); }
 .compare__cell:first-child { font-weight: 600; color: var(--text); }
+.compare-scroll-hint {
+  display: none;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 16px;
+  font-style: italic;
+}
 @media (max-width: 768px) {
-  .compare__row { grid-template-columns: 1fr; }
-  .compare__cell { padding: 14px 20px; border-bottom: 1px solid var(--line); }
-  .compare__cell::before {
-    content: attr(data-label);
-    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
-    text-transform: uppercase; color: var(--text-dim);
-    margin-right: 12px; min-width: 100px;
+  .compare-scroll-hint { display: block; }
+  .compare {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-dim) transparent;
   }
-  .compare__row--head { display: none; }
+  .compare::-webkit-scrollbar { height: 6px; }
+  .compare::-webkit-scrollbar-track { background: transparent; }
+  .compare::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 3px; }
+  .compare__row {
+    display: grid;
+    grid-template-columns: 160px 140px 140px 160px;
+    min-width: 600px;
+  }
+  .compare__cell {
+    padding: 16px 18px;
+    font-size: 14px;
+  }
 }
 
 .author-card {
@@ -552,6 +571,13 @@ body {
   padding: 6px 14px; border-radius: 20px;
   border: 1px solid var(--accent);
   white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .pricing__badge {
+    font-size: 10px;
+    padding: 5px 12px;
+    letter-spacing: 0.08em;
+  }
 }
 .pricing__name {
   font-family: 'Bitter', Georgia, serif;
@@ -1017,6 +1043,7 @@ body {
         <div class="compare__cell" data-label="Клуб">Остаётся навсегда</div>
       </div>
     </div>
+    <div class="compare-scroll-hint">← листай таблицу вправо →</div>
   </div>
 </section>
 
